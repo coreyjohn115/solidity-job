@@ -1,7 +1,19 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/**
+ * @title UserManger
+ * @dev 用户管理合约
+ */
 contract UserManger {
+    /**
+     * @dev 用户结构体
+     * @param registerAt 注册时间
+     * @param exists 是否存在
+     * @param name 用户名
+     * @param email 用户邮箱
+     * @param blance 余额
+     */
     struct User {
         address registerAt;
         bool exists;
@@ -92,10 +104,7 @@ contract UserManger {
      * @param end 结束索引
      * @return arr 用户信息数组
      */
-    function GetUserByRange(
-        uint start,
-        uint end
-    ) public view returns (User[] memory) {
+    function GetUserByRange(uint start, uint end) public view returns (User[] memory) {
         uint len = addressArr.length;
         require(start < end, "out of length");
         require(end <= len, "out of length");

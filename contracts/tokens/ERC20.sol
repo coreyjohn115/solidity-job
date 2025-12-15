@@ -1,11 +1,13 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+import "../interfaces/IERC20.sol";
+
 /**
- * @title SSToken
+ * @title ERC20
  * @dev 自己实现一个ERC20代币合约
  */
-contract SSToken {
+abstract contract ERC20 is IERC20 {
     // 不占用存储空间
     uint8 public immutable decimals;
 
@@ -13,8 +15,8 @@ contract SSToken {
     address owner;
     bool pause = false;
     uint256 public totalSupply;
-    string public name = "SSToken";
-    string public symbol = "SST";
+    string public name;
+    string public symbol;
 
     mapping(address => uint256) balances;
     mapping(address => mapping(address => uint256)) allowances;

@@ -1,6 +1,10 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
+/**
+ * @title Array
+ * @dev 数组合约
+ */
 contract Array {
     uint[] data;
     uint constant MAX = 10;
