@@ -19,11 +19,11 @@ contract Swap {
     ERC20 tokenA;
     ERC20 tokenB;
 
-    event SwapEvebt(address indexed from, address indexed to, uint256 value);
+    event SwapEvent(address indexed from, address indexed to, uint256 value);
 
     constructor(address _tokenA, address _tokenB) {
-        tokenA = TokenA(_tokenA);
-        tokenB = TokenB(_tokenB);
+        tokenA = ERC20(_tokenA);
+        tokenB = ERC20(_tokenB);
     }
 
     function SwapToken(uint value) public {
@@ -32,6 +32,6 @@ contract Swap {
         require(tokenA.transferFrom(msg.sender, address(this), value), "Transfer 1 failed");
         require(tokenB.transfer(msg.sender, value), "Transfer 2 failed");
 
-        emit SwapEvebt(msg.sender, address(this), value);
+        emit SwapEvent(msg.sender, address(this), value);
     }
 }
