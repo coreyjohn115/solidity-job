@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 /**
  * @title BeggingContract
  * @dev 讨饭合约
+ * @notice 合约部署地址: 0x61EAe4EE9E63115330c6B597945f1ea52468B3C7
  */
 contract BeggingContract {
     uint private startTime;
@@ -11,7 +12,7 @@ contract BeggingContract {
     mapping(address => uint) public votes;
     address[3] public top3;
 
-    address owner;
+    address public owner;
 
     event DonateEvent(address indexed donor, uint amount);
     event WithdrawEvent(address indexed owner, uint amount);
@@ -19,7 +20,7 @@ contract BeggingContract {
     constructor() {
         owner = msg.sender;
         startTime = block.timestamp;
-        endTime = startTime + 7 days; // 30天
+        endTime = startTime + 7 days; // 30天.
     }
 
     modifier onlyOwner() {
@@ -39,14 +40,14 @@ contract BeggingContract {
         require(msg.value > 0, "Invalid amount");
         votes[msg.sender] += msg.value;
 
-        for (uint i = 0; i < 3; ) {
+        for (uint i = 0; i < 3; i++) {
             if (votes[top3[i]] < votes[msg.sender]) {
+                for (uint j = 2; j > i; j--) {
+                    top3[j] = top3[j - 1];
+                }
+
                 top3[i] = msg.sender;
                 break;
-            }
-
-            unchecked {
-                i++;
             }
         }
 
